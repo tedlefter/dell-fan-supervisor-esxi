@@ -41,11 +41,11 @@ cd /data
 vibauthor -C -t fan_supervisor -v fan_supervisor.vib -O fan_supervisor-offline-bundle.zip -f
 exit
 ```
-7. Enable SSH on the ESXI instance and copy the vib package.
+7. Enable SSH on the ESXi instance and copy the vib package.
 ```
 scp fan_supervisor.vib <user>@<esxi_ip>:/tmp
 ```
-8. Install the package
+8. SSH into the ESXi instance and install the package
 ```
 esxcli software vib install -v /tmp/fan_supervisor.vib -f
 ```

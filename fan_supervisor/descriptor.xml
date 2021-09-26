@@ -1,13 +1,11 @@
-<vib version="5.0">
-  <type>bootbank</type>
+<vib version="7.0">
   <name>FanSupervisor</name>
-  <version>1.0.0-0.0.6</version>
+  <version>1.0.0-0.0.7</version>
   <vendor>TeodorLefter</vendor>
   <summary>Custom fan control for Dell Rxxx servers</summary>
   <description>Adds quite fan profile for Dell Rxxx servers</description>
   <relationships>
-    <depends>
-    </depends>
+    <depends/>
     <conflicts/>
     <replaces/>
     <provides/>
@@ -19,6 +17,9 @@
     <maintenance-mode>false</maintenance-mode>
   </system-requires>
   <file-list>
+    <file>/etc/init.d/999.fan_supervisor_init.sh</file>
+    <file>/opt/fan_supervisor/start_fan_supervisor.sh</file>
+    <file>/opt/fan_supervisor/stop_fan_supervisor.sh</file>
   </file-list>
   <acceptance-level>community</acceptance-level>
   <live-install-allowed>true</live-install-allowed>

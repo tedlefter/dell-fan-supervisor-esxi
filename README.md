@@ -9,11 +9,10 @@ Upon reaching the upper value, the iDRAC settings kick in and manual fan control
 For this to work, the script relies on the ipmitool binary.
 Make sure to install the ipmitool.vib provided in the repository.
 The ipmitool.vib was compiled and packaged by: [vsswitchzero](https://vswitchzero.com/ipmitool-vib/)
-Follow the above link for tutorials.
 
 ## Build and Install
 Customizations can be applied to the scripts.
-To build a new vib package, follow these steps.
+To build a new vib package, follow these steps:
 
 1. Update the `SENSOR_ID` value in the `start_fan_supervisor.sh` script.
 To get your sensor id run this after installing the ipmitool.

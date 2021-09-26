@@ -22,8 +22,8 @@ To get your sensor id run this after installing the ipmitool.
 Sample output:
 ```
 Inlet Temp		| 04h | ok  |  7.1 | 26 degrees C
-Temp				| 0Eh | ok  |  3.1 | 49 degrees C
-Temp				| 0Fh | ok  |  3.2 | 52 degrees C
+Temp			| 0Eh | ok  |  3.1 | 49 degrees C
+Temp			| 0Fh | ok  |  3.2 | 52 degrees C
 ```
 Select the sensor id to be monitored and update the `SENSOR_ID` value.
 2. Modify the scripts to your needs.

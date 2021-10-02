@@ -2,24 +2,35 @@
 
 UPPER_TEMP=55
 LOWER_TEMP=50
-SENSOR_ID=0Eh
+SENSOR_ID_CPU_1=0Eh
+SENSOR_ID_CPU_2=0Fh
 
 # Check for current temp
 # If above UPPER_TEMP set controls to iDRAC
 # If below LOWER_TEMP set manual controls and lower fans RPM
 
+extract_temp() {
+    local cpuTempReport=$(/opt/ipmitool/ipmitool sdr type temperature | grep $1)
+    local cpuTempValue=$(echo $cpuTempReport | cut -d "|" -f 5 | cut -d " " -f 2)
+    echo $cpuTempValue
+}
+
+
 echo "Starting fan supervisor..."
 while :
 do
-    CPU_TEMP_STRING=$(/opt/ipmitool/ipmitool sdr type temperature | grep $SENSOR_ID)
-    CPU_TEMP_VALUE=$(echo $CPU_TEMP_STRING | cut -d "|" -f 5 | cut -d " " -f 2)
-    echo "Status: Current temperature:" $CPU_TEMP_VALUE
+    cpu1Temp=$( extract_temp $SENSOR_ID_CPU_1 )
+    cpu2Temp=$( extract_temp $SENSOR_ID_CPU_2 )
 
-    if [ $CPU_TEMP_VALUE -gt $UPPER_TEMP ]
+    cpuTemp=$(( $cpu1Temp > $cpu2Temp ? $cpu1Temp : $cpu2Temp ))
+
+    echo "Status: Current temperature:" $cpuTemp
+
+    if [ $cpuTemp -gt $UPPER_TEMP ]
     then
         /opt/ipmitool/ipmitool raw 0x30 0x30 0x01 0x01 > /dev/null
         echo "Status: Fan mode set to iDRAC"
-    elif [ $CPU_TEMP_VALUE -lt $LOWER_TEMP ]
+    elif [ $cpuTemp -lt $LOWER_TEMP ]
     then
         /opt/ipmitool/ipmitool raw 0x30 0x30 0x01 0x00 > /dev/null
         /opt/ipmitool/ipmitool raw 0x30 0x30 0x02 0xff 0x0F > /dev/null
@@ -29,5 +40,5 @@ do
     fi
     echo
 
-    sleep 2
+    sleep 1
 done

@@ -1,6 +1,6 @@
 <vib version="7.0">
   <name>FanSupervisor</name>
-  <version>1.0.0-0.0.7</version>
+  <version>1.0.0-0.1.2</version>
   <vendor>TeodorLefter</vendor>
   <summary>Custom fan control for Dell Rxxx servers</summary>
   <description>Adds quite fan profile for Dell Rxxx servers</description>
